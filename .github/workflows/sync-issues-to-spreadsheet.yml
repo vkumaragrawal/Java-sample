@@ -1,0 +1,33 @@
+name: Sync GitHub Issues to Google Sheet
+
+on:
+  issues:
+    types: [opened]  # Trigger only when an issue is created
+
+jobs:
+  sync-to-sheet:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout repository
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Step 2: Sync Issues to Google Sheet
+      - name: Sync Issues to Sheet
+        uses: gsheet.action@v1  # Replace with the correct action version
+        with:
+          spreadsheet-id: ${{ secrets.SPREADSHEET_ID }}
+          range: "Sheet1!A1"  # Specify the range where data will be written
+          values: |
+            [
+              [
+                "${{ github.event.issue.id }}",
+                "${{ github.event.issue.title }}",
+                "${{ github.event.issue.state }}",
+                "${{ github.event.issue.labels.map(label => label.name).join(', ') }}",
+                "${{ github.event.issue.assignee.login || '' }}",
+                "${{ github.event.issue.created_at }}",
+                "${{ github.event.issue.closed_at || '' }}"
+              ]
+            ]
