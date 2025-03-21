@@ -5,15 +5,20 @@ EXCEL_FILE = "issues.xlsx"
 SHEET_NAME = "Issues"
 
 def update_excel(issue_data):
-    # Create or load the Excel file
-    if os.path.exists(EXCEL_FILE):
-        wb = load_workbook(EXCEL_FILE)
-        sheet = wb[SHEET_NAME]
-    else:
+    try:
+        # Try loading the existing Excel file
+        if os.path.exists(EXCEL_FILE):
+            wb = load_workbook(EXCEL_FILE)
+            sheet = wb[SHEET_NAME]
+        else:
+            raise FileNotFoundError
+
+    except (FileNotFoundError, OSError):
+        # Create a new workbook if the file doesn't exist or is invalid
         wb = Workbook()
         sheet = wb.active
         sheet.title = SHEET_NAME
-        # Add headers if creating a new file
+        # Add headers to the new workbook
         sheet.append(["Issue ID", "Title", "State", "Created At", "Labels"])
 
     # Append new issue data
