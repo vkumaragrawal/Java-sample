@@ -16,6 +16,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      # Step 0: Initialize Excel file (if missing)
+      - name: Create Excel file (if missing)
+        run: touch issues.xlsx
+
       # Step 2: Set up Python
       - name: Set up Python
         uses: actions/setup-python@v4
@@ -24,9 +28,7 @@ jobs:
 
       # Step 3: Install dependencies
       - name: Install Python packages
-        run: |
-          python -m pip install --upgrade pip
-          pip install openpyxl
+        run: pip install openpyxl
 
       # Step 4: Run Python script with issue data
       - name: Update Excel
