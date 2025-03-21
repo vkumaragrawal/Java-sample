@@ -1,8 +1,6 @@
 import os
-from openpyxl import load_workbook
-from datetime import datetime
+from openpyxl import Workbook, load_workbook
 
-# Excel file settings
 EXCEL_FILE = "issues.xlsx"
 SHEET_NAME = "Issues"
 
@@ -12,9 +10,10 @@ def update_excel(issue_data):
         wb = load_workbook(EXCEL_FILE)
         sheet = wb[SHEET_NAME]
     else:
-        wb = load_workbook()
+        wb = Workbook()
         sheet = wb.active
         sheet.title = SHEET_NAME
+        # Add headers if creating a new file
         sheet.append(["Issue ID", "Title", "State", "Created At", "Labels"])
 
     # Append new issue data
@@ -35,6 +34,6 @@ if __name__ == "__main__":
         "title": os.environ["ISSUE_TITLE"],
         "state": os.environ["ISSUE_STATE"],
         "created_at": os.environ["ISSUE_CREATED_AT"],
-        "labels": os.environ["ISSUE_LABELS"].split(",") if os.environ["ISSUE_LABELS"] else []
+        "labels": os.environ.get("ISSUE_LABELS", "").split(",") if os.environ.get("ISSUE_LABELS") else []
     }
     update_excel(issue_data)
