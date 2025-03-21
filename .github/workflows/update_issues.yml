@@ -1,0 +1,48 @@
+name: Update Excel on New Issue
+
+on:
+  issues:
+    types: [opened]
+
+permissions:
+  contents: write  # Required to commit changes back to the repo
+
+jobs:
+  update-excel:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout repository
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Step 2: Set up Python
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      # Step 3: Install dependencies
+      - name: Install Python packages
+        run: |
+          python -m pip install --upgrade pip
+          pip install openpyxl
+
+      # Step 4: Run Python script with issue data
+      - name: Update Excel
+        env:
+          ISSUE_ID: ${{ github.event.issue.number }}
+          ISSUE_TITLE: "${{ github.event.issue.title }}"
+          ISSUE_STATE: "${{ github.event.issue.state }}"
+          ISSUE_CREATED_AT: "${{ github.event.issue.created_at }}"
+          ISSUE_LABELS: "${{ join(github.event.issue.labels.*.name, ',') }}"
+        run: python update_excel.py
+
+      # Step 5: Commit and push changes
+      - name: Commit and push
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+          git add issues.xlsx
+          git commit -m "Update Excel with new issue #${{ github.event.issue.number }}"
+          git push
