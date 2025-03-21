@@ -16,10 +16,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # Step 0: Initialize Excel file (if missing)
-      - name: Create Excel file (if missing)
-        run: touch issues.xlsx
-
       # Step 2: Set up Python
       - name: Set up Python
         uses: actions/setup-python@v4
