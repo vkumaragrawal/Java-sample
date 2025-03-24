@@ -22,7 +22,8 @@ jobs:
     - name: Process Issue
       id: process
       env:
-        ISSUE_BODY: ${{ github.event.issue.body }}
+        ISSUE_TITLE: ${{ github.event.issue.title }}  # Pass issue title here
+        ISSUE_BODY: ${{ github.event.issue.body }}    # Pass issue body here
       run: |
         python process_issue.py
 
