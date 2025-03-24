@@ -1,0 +1,41 @@
+name: Assign Owning Team
+on:
+  issues:
+    types: [opened]
+
+jobs:
+  analyze-issue:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: 3.10
+
+    - name: Install dependencies
+      run: pip install json5
+
+    - name: Process Issue
+      id: process
+      env:
+        ISSUE_BODY: ${{ github.event.issue.body }}
+      run: |
+        python process_issue.py
+
+    - name: Add Comment
+      uses: actions/github-script@v6
+      with:
+        script: |
+          const teams = "${{ steps.process.outputs.teams }}";
+          const comment = teams ? 
+            `This issue is owned by: ${teams}` : 
+            `This issue is assigned to the Hero Team as no specific team was matched.`;
+          github.rest.issues.createComment({
+            issue_number: context.issue.number,
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            body: comment
+          })
