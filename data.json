@@ -1,0 +1,14 @@
+[
+  {
+    "owning_team": "Team-A",
+    "resource_keywords": ["server", "deployment"]
+  },
+  {
+    "owning_team": "Team-B",
+    "resource_keywords": ["UI", "frontend"]
+  },
+  {
+    "owning_team": "Team-C",
+    "resource_keywords": ["database", "postgres"]
+  }
+]
