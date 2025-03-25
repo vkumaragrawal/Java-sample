@@ -27,17 +27,17 @@ jobs:
       run: |
         python process_issue.py
 
-    - name: Add Comment
+    - name: Add Labels
       uses: actions/github-script@v6
       with:
         script: |
           const teams = "${{ steps.process.outputs.teams }}";
-          const comment = teams ? 
-            `This issue is owned by: ${teams}` : 
-            `This issue is assigned to the Hero Team as no specific team was matched.`;
-          github.rest.issues.createComment({
+          const labelsToAdd = teams ? teams.split(', ') : [];
+
+          // Add labels to the issue
+          await github.rest.issues.addLabels({
             issue_number: context.issue.number,
             owner: context.repo.owner,
             repo: context.repo.repo,
-            body: comment
-          })
+            labels: [...new Set(labelsToAdd)] // Ensure unique labels
+          });
