@@ -19,9 +19,14 @@ for entry in data:
     if any(keyword in combined_issue_content for keyword in keywords):
         matched_teams.add(entry['owning_team'])
 
-# If no teams are matched, assign the "Hero Team"
-if not matched_teams:
-    matched_teams.add("Hero Team")
+# Prepare output based on matches found
+if matched_teams:
+    # If multiple teams are matched, include FR_FALLBACK label only once.
+    if len(matched_teams) > 1:
+        matched_teams.add("FR_FALLBACK")
+else:
+    # If no teams are matched, assign FR_FALLBACK label.
+    matched_teams.add("FR_FALLBACK")
 
-# Output the matched teams as a comma-separated string
-print(f"::set-output name=teams::{', '.join(matched_teams)}")
+# Output the matched teams as a comma-separated string (excluding FR_FALLBACK)
+print(f"::set-output name=teams::{', '.join([team for team in matched_teams if team != 'FR_FALLBACK'])}")
