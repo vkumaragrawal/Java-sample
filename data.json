@@ -1,94 +1,62 @@
 [
   {
-    "owning_team": "#help-iam",
-    "resource_keywords": ["newrelic_account_management","account","iam","identity","access","management"]
+    "owning_team": "Sales Team",
+    "resource_keywords": [
+      "FR_SALES"
+    ]
   },
   {
-    "owning_team": "#help-alerts",
-    "resource_keywords": ["newrelic_alert_channel", "alert", "synthetic alert"]
+    "owning_team": "Delivery Team",
+    "resource_keywords": [
+      "FR_DELIVERY"
+    ]
   },
   {
-    "owning_team": "#help-alerts",
-    "resource_keywords": ["newrelic_alert_condition", "alert", "synthetic alert"]
+    "owning_team": "Development Team",
+    "resource_keywords": [
+      "FR_BACKEND"
+    ]
   },
   {
-    "owning_team": "#help-alerts",
-    "resource_keywords": ["newrelic_alert_muting_rule", "alert", "synthetic alert"]
+    "owning_team": "Operations Team",
+    "resource_keywords": [
+      "FR_OPERATIONS"
+    ]
   },
   {
-    "owning_team": "#help-alerts",
-    "resource_keywords": ["newrelic_alert_policy", "alert", "synthetic alert"]
+    "owning_team": "Support Team",
+    "resource_keywords": [
+      "FR_SUPPORT"
+    ]
   },
   {
-    "owning_team": "#help-alerts",
-    "resource_keywords": ["newrelic_alert_policy_channel", "alert", "synthetic alert"]
+    "owning_team": "Finance Team",
+    "resource_keywords": [
+      "FR_FINANCE"
+    ]
   },
   {
-    "owning_team": "#help-iam",
-    "resource_keywords": ["newrelic_api_access_key", "iam", "access", "key"]
+    "owning_team": "HR Team",
+    "resource_keywords": [
+      "FR_HIRING"
+    ]
   },
   {
-    "owning_team": "#help-api-platform",
-    "resource_keywords": ["newrelic_application_settings", "application setting"]
+    "owning_team": "QA Team",
+    "resource_keywords": [
+      "FR_TESTING"
+    ]
   },
   {
-    "owning_team": "#help-api-platform",
-    "resource_keywords": ["newrelic_browser_application", "browser application"]
+    "owning_team": "Security Team",
+    "resource_keywords": [
+      "FR_SECURITY_ANALYSIS"
+    ]
   },
   {
-    "owning_team": "#help-cloud-monitoring",
-    "resource_keywords": ["newrelic_cloud_aws_govcloud_integrations", "cloud", "govcloud", "integration"]
-  },
-  {
-    "owning_team": "#help-cloud-monitoring",
-    "resource_keywords": ["newrelic_cloud_aws_govcloud_link_account", "cloud", "govcloud", "link", "account"]
-  },
-  {
-    "owning_team": "#help-cloud-monitoring",
-    "resource_keywords": ["newrelic_cloud_aws_integrations", "cloud", "aws", "integration"]
-  },
-  {
-    "owning_team": "#help-cloud-monitoring",
-    "resource_keywords": ["newrelic_cloud_aws_link_account", "cloud", "aws", "link", "account"]
-  },
-  {
-    "owning_team": "#help-cloud-monitoring",
-    "resource_keywords": ["newrelic_cloud_azure_integrations", "cloud", "azure", "integration"]
-  },
-  {
-    "owning_team": "#help-cloud-monitoring",
-    "resource_keywords": ["newrelic_cloud_azure_link_account", "cloud", "azure", "link", "account"]
-  },
-  {
-    "owning_team": "#help-cloud-monitoring",
-    "resource_keywords": ["newrelic_cloud_gcp_integrations", "cloud", "gcp", "integration"]
-  },
-  {
-    "owning_team": "#help-cloud-monitoring",
-    "resource_keywords": ["newrelic_cloud_gcp_link_account", "cloud", "gcp", "link", "account"]
-  },
-  {
-    "owning_team": "#help-logging",
-    "resource_keywords": ["newrelic_data_partition_rule", "data partition rule", "logging"]
-  },
-  {
-    "owning_team": "#help-entity-platform",
-    "resource_keywords": ["newrelic_entity_tags", "entity tags", "entity", "tags"]
-  },
-  {
-    "owning_team": "#help-metrics",
-    "resource_keywords": ["newrelic_events_to_metrics_rule", "events to metrics rule", "metrics"]
-  },
-  {
-    "owning_team": "#help-iam",
-    "resource_keywords": ["newrelic_group", "group", "iam"]
-  },
-  {
-    "owning_team": "#help-alerts",
-    "resource_keywords": ["newrelic_infra_alert_condition", "alert", "infra"]
-  },
-  {
-    "owning_team": "#help-virtuoso",
-    "resource_keywords": ["newrelic_insights_event", "insights", "event"]
+    "owning_team": "DevOps Team",
+    "resource_keywords": [
+      "FR_CI_CD_PIPELINES"
+    ]
   }
 ]
