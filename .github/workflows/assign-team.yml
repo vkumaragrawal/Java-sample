@@ -1,4 +1,4 @@
-name: Assign Owning Team
+name: Assign Owning Team Labels
 
 on:
   issues:
@@ -8,36 +8,40 @@ jobs:
   analyze-issue:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.10'
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
 
-    - name: Install dependencies
-      run: pip install json5
+      - name: Install dependencies
+        run: pip install json5
 
-    - name: Process Issue
-      id: process
-      env:
-        ISSUE_TITLE: ${{ github.event.issue.title }}  # Pass issue title here
-        ISSUE_BODY: ${{ github.event.issue.body }}    # Pass issue body here
-      run: |
-        python process_issue.py
+      - name: Process Issue Content
+        id: process
+        env:
+          ISSUE_TITLE: ${{ github.event.issue.title }}  # Pass issue title here
+          ISSUE_BODY: ${{ github.event.issue.body }}    # Pass issue body here
+        run: |
+          python process_issue.py
 
-    - name: Add Labels
-      uses: actions/github-script@v6
-      with:
-        script: |
-          const teams = "${{ steps.process.outputs.teams }}";
-          const labelsToAdd = teams ? teams.split(', ') : [];
+      - name: Add Labels to Issue
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const labels = "${{ steps.process.outputs.labels }}";
+            const labelsToAdd = labels ? labels.split(', ').filter(label => label) : [];
 
-          // Add labels to the issue
-          await github.rest.issues.addLabels({
-            issue_number: context.issue.number,
-            owner: context.repo.owner,
-            repo: context.repo.repo,
-            labels: [...new Set(labelsToAdd)] // Ensure unique labels
-          });
+            // Ensure there are valid labels before making API call
+            if (labelsToAdd.length > 0) {
+              await github.rest.issues.addLabels({
+                issue_number: context.issue.number,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                labels: [...new Set(labelsToAdd)] // Ensure unique labels are added
+              });
+            } else {
+              console.log("No valid labels found to add.");
+            }
