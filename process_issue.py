@@ -20,13 +20,15 @@ for entry in data:
         matched_teams.add(entry['owning_team'])
 
 # Prepare output based on matches found
-if matched_teams:
-    # If multiple teams are matched, include FR_FALLBACK label only once.
-    if len(matched_teams) > 1:
-        matched_teams.add("FR_FALLBACK")
+if len(matched_teams) == 1:
+    # If a single team is matched, add only that owning team
+    output_labels = ", ".join(matched_teams)
+elif len(matched_teams) > 1:
+    # If multiple teams are matched, add only Virtuoso Team label
+    output_labels = "Virtuoso Team"
 else:
-    # If no teams are matched, assign FR_FALLBACK label.
-    matched_teams.add("FR_FALLBACK")
+    # If no teams are matched, add only Virtuoso Team label
+    output_labels = "Virtuoso Team"
 
-# Output the matched teams as a comma-separated string (excluding FR_FALLBACK)
-print(f"::set-output name=teams::{', '.join([team for team in matched_teams if team != 'FR_FALLBACK'])}")
+# Output the matched labels as a comma-separated string
+print(f"::set-output name=labels::{output_labels}")
